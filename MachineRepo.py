@@ -23,7 +23,7 @@ def search():
 def remove():
     return "remove"
 
-def helpmenu():
+def helpmenu(): #need to further beautify the help menu
     message = ""
     message = message + "==== Database ====" + "\n"
     message = message + "connect - connect to database" + "\n"

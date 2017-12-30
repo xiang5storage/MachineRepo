@@ -1,0 +1,44 @@
+
+The aim of this program is to really have alot of flexibility in querying and storing of machines
+
+
+- Starts the program by running ./MachineRepo.py
+
+. Once started it goes into a prompt  "MachineRepo >"
+
+. Functionalities
+   - Connect to database
+   - Create new database
+   - Create new network project (Each project is a database)
+   - list all network projects
+   - Add NMAP xml into the project
+   - Add machine into the project
+   - Add new column
+   - Remove machine
+   - Remove column
+   - List all machines store in the network's project
+   - List all fields of a host(s)
+     - Files ordering can be arranged
+   - List all services
+     - with the machine ip indicated
+   - Search
+
+
+- Version 1
+
+ - Support sqlite3 only
+ - Read some standard fields in nmap (ip, domains, ports, banner)
+ - adding/edit/remove of machines, columns
+ - Search
+
+
+
+- Requirements:
+pip install pyfiglet (for ascii text art)
+
+
+- What i need to do?
+
+1) create a prompt, help menu and ascii arts (done)
+2) auto tab complete for commands
+3) create database

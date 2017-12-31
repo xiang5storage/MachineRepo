@@ -2,13 +2,17 @@
 
 import sys
 import readline
+from terminaltables import AsciiTable
 from pyfiglet import figlet_format
+from common import sqlite,nmapxml
+
 
 def banner():
     print ""
     print(figlet_format('MachineRepo', font='banner'))
 
 def connectdb():
+    #sqlite.sqliteconnect("dbfile")
     return "connectDB"
 
 def disconnectdb():
@@ -23,19 +27,29 @@ def search():
 def remove():
     return "remove"
 
-def helpmenu(): #need to further beautify the help menu
-    message = ""
-    message = message + "==== Database ====" + "\n"
-    message = message + "connect - connect to database" + "\n"
-    message = message + "disconnect database" + "\n"
-    message = message + "==== Hosts ====" + "\n"
-    message = message + "hosts - List all hosts in the database" + "\n"
-    message = message + "search - Search the current project for keyword" + "\n"
-    message = message + "remove - Remove hosts"
-    return message
+def importnmap():
+    #nmapxml.importnmaptodatabase(xmlfile)
+    return "nmap xml files imported successfully"
+
+def helpmenu():
+    message = []
+    message.append(["command","Description"])
+    message.append(["connect","Connect to database"])
+    message.append(["disconnect","Disconnect with database"])
+    message.append(["hosts","List all hosts in the database"])
+    message.append(["search","Search the current project for keyword"])
+    message.append(["remove","Remove host(s)"])
+    message.append(["import","Import nmap XML to database"])
+    message.append(["exit","Exit the program"])
+
+    helptable = AsciiTable(message)
+    helptable.inner_row_border = False
+    helptable.outer_border = False
+
+    return helptable.table + "\n"
 
 def completer(text, state):
-    cmdoptions = ['help', 'hosts', 'connect', 'disconnect', "search"]
+    cmdoptions = ['help','hosts','connect','disconnect',"search","import","exit"]
     options = [x for x in cmdoptions if x.startswith(text)]
     try:
         return options[state]
@@ -49,6 +63,7 @@ def main():
     readline.parse_and_bind("tab: complete")
 
     while True:
+
         print "MachineRepo >",
         userinput = raw_input(" ",)
 
@@ -61,10 +76,11 @@ def main():
             "disconnect":disconnectdb(),
             "hosts":listhosts(),
             "search":search(),
-            "remove":remove()
+            "remove":remove(),
+            "import":importnmap()
         }
-
-        print switcher.get(userinput,"invalid")
+        print ""
+        print switcher.get(userinput,"")
 
 main()
 
